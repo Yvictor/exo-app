@@ -1,0 +1,31 @@
+[package]
+name = "exo-app-v"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "exo_app_v_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.0.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.0.0", features = [] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+#uv = { path = "./uv/crates/uv" }
+#reqwest = { version = "0.12.7", default-features = false, features = ["json", "gzip", "stream", "rustls-tls", "rustls-tls-native-roots", "socks", "multipart", "http2"] }
+#reqwest-middleware = { git = "https://github.com/astral-sh/reqwest-middleware", rev = "5e3eaf254b5bd481c75d2710eed055f95b756913", features = ["multipart"] }
+#reqwest-retry = { git = "https://github.com/astral-sh/reqwest-middleware", rev = "5e3eaf254b5bd481c75d2710eed055f95b756913" }
+
+#[patch.crates-io]
+#reqwest-middleware = { git = "https://github.com/astral-sh/reqwest-middleware", rev = "5e3eaf254b5bd481c75d2710eed055f95b756913" }
