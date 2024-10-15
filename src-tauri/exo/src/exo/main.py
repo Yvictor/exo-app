@@ -67,12 +67,12 @@ args.node_id = args.node_id or get_or_create_node_id()
 chatgpt_api_endpoints = [f"http://{ip}:{args.chatgpt_api_port}/v1/chat/completions" for ip in get_all_ip_addresses()]
 web_chat_urls = [f"http://{ip}:{args.chatgpt_api_port}" for ip in get_all_ip_addresses()]
 if DEBUG >= 0:
-  print("Chat interface started:")
+  print("Chat interface started:", flush=True)
   for web_chat_url in web_chat_urls:
-    print(f" - {terminal_link(web_chat_url)}")
-  print("ChatGPT API endpoint served at:")
+    print(f" - {terminal_link(web_chat_url)}", flush=True)
+  print("ChatGPT API endpoint served at:", flush=True)
   for chatgpt_api_endpoint in chatgpt_api_endpoints:
-    print(f" - {terminal_link(chatgpt_api_endpoint)}")
+    print(f" - {terminal_link(chatgpt_api_endpoint)}", flush=True)
 
 if args.discovery_module == "udp":
   discovery = UDPDiscovery(args.node_id, args.node_port, args.listen_port, args.broadcast_port, lambda peer_id, address, device_capabilities: GRPCPeerHandle(peer_id, address, device_capabilities), discovery_timeout=args.discovery_timeout)
@@ -180,7 +180,7 @@ async def main():
   def handle_exit():
     asyncio.ensure_future(shutdown(signal.SIGTERM, loop))
 
-  for s in [signal.SIGINT, signal.SIGTERM]:
+  for s in [signal.SIGINT, signal.SIGTERM, signal.SIGKILL]:
     loop.add_signal_handler(s, handle_exit)
 
   await node.start(wait_for_peers=args.wait_for_peers)

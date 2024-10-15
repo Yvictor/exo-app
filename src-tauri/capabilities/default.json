@@ -8,6 +8,8 @@
     "shell:allow-open",
     "shell:allow-execute",
     "shell:default",
+    "shell:allow-kill",
+    
     {
       "identifier": "shell:allow-execute",
       "allow": [
@@ -20,9 +22,18 @@
               "validator": "\\S+"
             },
             {
-              "validator": "\\S+"
+              "validator": "\\S+*"
             }
           ]
+        }
+      ]
+    },
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        {
+          "name": "exo",
+          "cmd": "exo"
         }
       ]
     }
